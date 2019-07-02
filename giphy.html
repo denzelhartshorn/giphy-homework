@@ -6,75 +6,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Sea Critter Giphy</title>
+    <script src="https://www.gstatic.com/firebasejs/6.1.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.1.0/firebase-database.js"></script>
 </head>
 
 <body>
 
-    <!-- Cirtter Select Box -->
+    <!-- saved critter div -->
+    <div class="dumbDiv">
+    </div>
+
+    <!-- Critter Select Box -->
     <form id="critter-form">
 
         <!-- Label for Text Box -->
-        <label for="critter-input">Choose Your Critter</label>
+        <label for="critter-input">Choose Your Critter\</label>
 
         <!-- Text Input Box -->
-        <input type="text" id="critter-input"><br>
+        <input type="text" id="critter-input" /><br>
 
-        <!-- Submit Button -->
+        <!-- add fave critter Button -->
         <input id="select-critter" type="submit" value="add your favorite sea critter">
+
+        <!-- Delete Button -->
+        <button id="deleteButton" type="button" class="btn btn-info">Clear critters</button>
+
+        <!-- save Button -->
+        <button id="saveButton" type="button" class="btn btn-info">save critters</button>
+
+        <div id="critter-div"></div>
     </form>
-
-    <!-- critter Information -->
-    <div id="critter-div"></div>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="./app.js"></script>
 </body>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type="text/javascript">
-    // Example queryURL for Giphy API
-
-    $("#select-critter").on("click", function (event) {
-        event.preventDefault();
-        // $("#critter-input").val() - this target input from text box
-        var queryURL = "https://api.giphy.com/v1/gifs/trending?api_key=lggV2sIXzWE8C5FTbaxibMPd8VaR0ZF1";
-
-        var searchforgif = function (str, limit) {
-            return `http://api.giphy.com/v1/gifs/search?q=${str}&api_key=lggV2sIXzWE8C5FTbaxibMPd8VaR0ZF1&limit=${limit}`
-        }
-
-        const userInput = $("#critter-input").val()
-        
-        $.ajax({
-            url: searchforgif(userInput, 5),
-            method: "GET"
-        }).then(function (response) {
-            console.log(response.data)
-            console.log(response.data[0])
-            const $image = $("<img>")
-            $image.attr("src",response.data[0].images.fixed_height.url)
-            $("#critter-div").append($image)
-        });
-        
-        // gif animate function (doesnt work)
-
-    //     $("<img>").on("click", function() {
-      
-    //   let state = $(this).attr('data-state');
-    
-    //   if(state === 'still')    {
-    //     $(this).attr('src', $(this).attr('data-animate'));
-    //     $(this).attr('data-state', 'animate');
-    //   } else {
-    //     $(this).attr('src', $(this).attr('data-still'));
-    //     $(this).attr('data-state', 'still');
-    //   }
-    // });
-
-    })
-    // console.log("hit")
-
-
-
-
-</script>
 
 </html>
